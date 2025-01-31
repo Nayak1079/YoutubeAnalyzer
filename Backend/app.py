@@ -15,7 +15,6 @@ youtube = googleapiclient.discovery.build(
 
 # Function to calculate sentiment scores
 def sentiment_scores(sentence):
-    # Create a SentimentIntensityAnalyzer object
     sid_obj = SentimentIntensityAnalyzer()
     return sid_obj.polarity_scores(sentence)
 
@@ -25,50 +24,75 @@ def sentiment(sentence):
     sentiment_dict = sentiment_scores(sentence)
     return jsonify(sentiment_dict)
 
-# Route to fetch YouTube comments and analyze sentiment
-@app.route('/comments', methods=['POST'])
-def youtube_comments():
-    print (request)
-    data = request.json
-    print("data is",data)
-    video_url = data.get('url',"")
-
-
-    # Extract video ID from the YouTube URL
-    video_id = video_url.split("v=")[-1]
+# Function to fetch all YouTube comments
+def get_all_comments(video_id):
+    comments = []
+    next_page_token = None
     
-    try:
-        # Fetch comments from YouTube
+    while True:
         response = youtube.commentThreads().list(
             part="snippet",
             videoId=video_id,
-            maxResults=100
+            maxResults=100,
+            pageToken=next_page_token
         ).execute()
-
-        # Collect comments and their sentiment
-        comments_with_sentiment = []
-        posScore = 0
-        posCount = 0
-        negScore = 0
-        negCount = 0
-        neuScore = 0
-        neuCount = 0
-        compScore = 0
+        
         for item in response.get('items', []):
             comment = item['snippet']['topLevelComment']['snippet']['textDisplay']
+            comments.append(comment)
+        
+        next_page_token = response.get('nextPageToken')
+        if not next_page_token:
+            break
+    
+    return comments
+
+# Route to fetch YouTube comments and analyze sentiment
+@app.route('/comments', methods=['POST'])
+def youtube_comments():
+    data = request.json
+    video_url = data.get('url', "")
+
+    if not video_url:
+        return jsonify({"error": "URL is required"}), 400
+
+    if "v=" in video_url:
+        video_id = video_url.split("v=")[-1]
+    else:
+        return jsonify({"error": "Invalid YouTube URL"}), 400
+
+    try:
+        comments = get_all_comments(video_id)
+        comments_with_sentiment = []
+        posCount, negCount, neuCount = 0, 0, 0
+
+        for comment in comments:
             sentiment = sentiment_scores(comment)
-            compScore += sentiment['compound']
-            if(compScore > 0.05):
-                posScore += sentiment['pos']
+            compound_score = sentiment['compound']
+            comments_with_sentiment.append({
+                "comment": comment,
+                "sentiment": sentiment
+            })
+            
+            if compound_score > 0.05:
                 posCount += 1
-            elif(compScore < -0.05):
-                negScore += sentiment['neg']  
+            elif compound_score < -0.05:
                 negCount += 1
             else:
-                neuScore += sentiment['neu']
                 neuCount += 1
-        print(posCount);    
-        return jsonify({"comments": comments_with_sentiment})
+        totalComments = len(comments_with_sentiment)
+        posCommentPercentage = (posCount/totalComments)*100
+        negCommentPercentage = (negCount/totalComments)*100
+        neuCommentPercentage = (neuCount/totalComments)*100
+        return jsonify({
+            "Total negative comments": negCount,
+            "Total positive comments": posCount,
+            "Total neutral comments": neuCount,
+            "Total comments analyzed": len(comments_with_sentiment),
+            "Positive comments percentage": posCommentPercentage,
+            "Negative comments percentage": negCommentPercentage,
+            "Neutral comments percentage": neuCommentPercentage,
+        })
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
