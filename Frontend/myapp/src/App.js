@@ -20,7 +20,7 @@ export default function App() {
         <Route path='/Home' element = {<Home/>}/>
         <Route path='/Login' element={<Login  Loggedin={Loggedin} setLogin={setLogin}/>}/>
         <Route path='/Signup' element={<Signup Signedup={Signedup} setSignup={setSignup}/>}/>
-        <Route path='/connect' element = {<Connect/>}/>
+        <Route path='/Contact' element = {<Connect/>}/>
       </Routes>
     </div>
   )

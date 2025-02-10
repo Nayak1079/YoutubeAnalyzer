@@ -4,51 +4,48 @@ import { NavLink } from "react-router-dom";
 export default function Navbar({ Loggedin, setLogin }) {
 
   return (
-    <nav className="w-full bg-gray-100 fixed top-0 left-0 z-50 px-6 py-3 flex justify-between items-center">
-      <Link to='/'>
-        <p className="text-2xl font-bold text-gray-800">CommentAnaly</p>
-    <nav className="w-full bg-gray-100  fixed top-0 left-0 z-50 px-6 py-3 flex justify-between items-center">
-      <Link to="/"><p className="text-2xl font-bold text-gray-800 cursor-pointer">CommentAnaly</p></Link>
+        <nav className="w-full bg-gray-100  fixed top-0 left-0 z-50 px-6 py-3 flex justify-between items-center">
+          <Link to="/"><p className="text-2xl font-bold text-gray-800 cursor-pointer">CommentAnaly</p></Link>
 
-      {!Loggedin &&
-        <Link to="/Login">
-          <button className="px-5 py-2 bg-white border-black text-black border  hover:bg-gray-200">
-            Get Started
-          </button>
-        </Link>
+          {!Loggedin &&
+            <Link to="/Login">
+              <button className="px-5 py-2 bg-white border-black text-black border  hover:bg-gray-200">
+                Get Started
+              </button>
+            </Link>
 
-      }
-      {
-       Loggedin && 
-      <div className="flex gap-20 flex-row text-gray-700">
-        <NavLink   to="/home"
-        style={({ isActive }) => ({
-          textDecoration: isActive ? 'underline-blue-800' : 'none',
-        })}>Home</NavLink>
-        <NavLink    to="/Contact"
-        style={({ isActive }) => ({
-          textDecoration: isActive ? 'underline' : 'none',
-        })}>Contact</NavLink>
-        <NavLink   to="/About"
-        style={({ isActive }) => ({
-          textDecoration: isActive ? 'underline' : 'none',
-        })}>About</NavLink>
-      </div>
-}
+          }
+          {
+            Loggedin &&
+            <div className="flex gap-20 flex-row text-gray-700">
+              <NavLink to="/home"
+                style={({ isActive }) => ({
+                  textDecoration: isActive ? 'underline' : 'none',
+                })}>Home</NavLink>
+              <NavLink to="/Contact"
+                style={({ isActive }) => ({
+                  textDecoration: isActive ? 'underline' : 'none',
+                })}>Contact</NavLink>
+              <NavLink to="/About"
+                style={({ isActive }) => ({
+                  textDecoration: isActive ? 'underline' : 'none',
+                })}>About</NavLink>
+            </div>
+          }
 
-      {Loggedin &&
+          {Loggedin &&
 
-        <Link to="/">
-          <button className="px-5 py-2 bg-white border-black text-black border  hover:bg-gray-200" onClick={() => {
-            setLogin(false)
-          }}>
-            Log Out
-          </button>
-        </Link>}
+            <Link to="/">
+              <button className="px-5 py-2 bg-white border-black text-black border  hover:bg-gray-200" onClick={() => {
+                setLogin(false)
+              }}>
+                Log Out
+              </button>
+            </Link>
+            }
+        </nav>
+    
+        );
 
-
-
-    </nav>
-  );
-}
+  }
 

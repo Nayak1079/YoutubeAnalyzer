@@ -9,7 +9,7 @@ CORS(app)
 # YouTube API details
 api_service_name = "youtube"
 api_version = "v3"
-DEVELOPER_KEY = "AIzaSyCBItVF-vEK-o8OPOVjQbQbzUFq84eY_AE"
+DEVELOPER_KEY = ""
 
 youtube = googleapiclient.discovery.build(
     api_service_name, api_version, developerKey=DEVELOPER_KEY
