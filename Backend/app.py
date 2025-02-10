@@ -1,14 +1,15 @@
-from flask import Flask, jsonify, request , render_template, redirect, url_for
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import googleapiclient.discovery
 
 
 app = Flask(__name__)
-
+CORS(app)
 # YouTube API details
 api_service_name = "youtube"
 api_version = "v3"
-DEVELOPER_KEY = ""
+DEVELOPER_KEY = "AIzaSyCBItVF-vEK-o8OPOVjQbQbzUFq84eY_AE"
 
 youtube = googleapiclient.discovery.build(
     api_service_name, api_version, developerKey=DEVELOPER_KEY
@@ -49,7 +50,7 @@ def get_all_comments(video_id):
     return comments
 
 # Route to fetch YouTube comments and analyze sentiment
-@app.route('/comments', methods=['POST'])
+@app.route('/Home', methods=['POST'])
 def youtube_comments():
     data = request.json
     video_url = data.get('url', "")

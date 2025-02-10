@@ -7,7 +7,8 @@ export default function Navbar({ Loggedin, setLogin }) {
     <nav className="w-full bg-gray-100 fixed top-0 left-0 z-50 px-6 py-3 flex justify-between items-center">
       <Link to='/'>
         <p className="text-2xl font-bold text-gray-800">CommentAnaly</p>
-      </Link>
+    <nav className="w-full bg-gray-100  fixed top-0 left-0 z-50 px-6 py-3 flex justify-between items-center">
+      <Link to="/"><p className="text-2xl font-bold text-gray-800 cursor-pointer">CommentAnaly</p></Link>
 
       {!Loggedin &&
         <Link to="/Login">
