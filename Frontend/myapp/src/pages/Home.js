@@ -3,6 +3,7 @@ import toast, { Toaster } from "react-hot-toast";
 import PieChart from '../components/Piechar';
 import loader from '../images/loader.gif';
 import rotater from '../images/rotater.gif';
+import Footer from '../components/Footer';
 export default function Home() {
 
   const [url, setUrl] = useState('');
@@ -45,13 +46,14 @@ export default function Home() {
   };
 
   return (
+    <div>
     <div className="bg-gray-100 h-screen flex flex-col md:flex-row items-center justify-around px-6">
       <div className="text-center md:text-left max-w-lg">
-        <h1 className="text-6xl md:text-7xl font-extrabold text-gray-800 drop-shadow-lg">
+        <h1 className="text-6xl md:text-7xl font-extrabold text-gray-800 drop-shadow-lg cursor-pointer hover:translate-x-3 transform transition duration-200">
           YouTube Analyzer
         </h1>
         <p className="text-lg md:text-xl text-gray-800 mt-5 opacity-90">
-          Discover sentiments hidden in your YouTube videos.
+          Discover <span className='font-bold animate-pulse'>sentiments</span>  hidden in your YouTube videos.
         </p>
       </div>
 
@@ -91,7 +93,7 @@ export default function Home() {
             <p><span className='text-green-700 font-bold'>Positive</span> Comments Percentage: {result["Positive comments percentage"]}%</p>
             <p><span className='text-red-800 font-bold'>Negative</span> Comments Percentage: {result["Negative comments percentage"]}%</p>
             <p><span className='text-gray-600 font-bold'>Neutral</span> Comments Percentage: {result["Neutral comments percentage"]}%</p>
-            <button className="bg-blue-600 text-white font-medium w-58 py-2 px-5 mt-3  hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            <button className="bg-blue-600 text-white  font-medium w-58 py-2 px-5 mt-3  hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
              onClick={() =>{setShowGraph(true)}}>
               Show Graph
             </button>
@@ -113,6 +115,8 @@ export default function Home() {
 
         </div>  
       }
+    </div>
+    <Footer/>
     </div>
   );
 }
