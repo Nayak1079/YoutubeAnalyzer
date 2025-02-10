@@ -15,23 +15,38 @@ export default function Navbar({ Loggedin, setLogin }) {
             </Link>
 
           }
-          {
-            Loggedin &&
-            <div className="flex gap-20 flex-row text-gray-700">
-              <NavLink to="/home"
-                style={({ isActive }) => ({
-                  textDecoration: isActive ? 'underline' : 'none',
-                })}>Home</NavLink>
-              <NavLink to="/Contact"
-                style={({ isActive }) => ({
-                  textDecoration: isActive ? 'underline' : 'none',
-                })}>Contact</NavLink>
-              <NavLink to="/About"
-                style={({ isActive }) => ({
-                  textDecoration: isActive ? 'underline' : 'none',
-                })}>About</NavLink>
-            </div>
-          }
+{
+  Loggedin &&
+  <div className="flex gap-20 flex-row text-gray-700">
+    <NavLink className='hover:-translate-y-1 transform transition duration-200' to="/home"
+      style={({ isActive }) => ({
+        textDecoration: isActive ? 'underline' : 'none',
+        textDecorationColor: isActive ? 'blue' : 'transparent',
+        textUnderlineOffset: '4px' // Adjusts the distance of the underline from the text
+      })}>
+      Home
+    </NavLink>
+    
+    <NavLink className='hover:-translate-y-1 transform transition duration-200' to="/Contact"
+      style={({ isActive }) => ({
+        textDecoration: isActive ? 'underline' : 'none',
+        textDecorationColor: isActive ? 'blue' : 'transparent',
+        textUnderlineOffset: '4px'
+      })}>
+      Contact
+    </NavLink>
+    
+    <NavLink className='hover:-translate-y-1 transform transition duration-200' to="/About"
+      style={({ isActive }) => ({
+        textDecoration: isActive ? 'underline' : 'none',
+        textDecorationColor: isActive ? 'blue' : 'transparent',
+        textUnderlineOffset: '4px'
+      })}>
+      About
+    </NavLink>
+  </div>
+}
+
 
           {Loggedin &&
 
