@@ -16,8 +16,9 @@ export default function Landing() {
     <p className="mt-3 text-lg text-gray-600">
       Understand sentiment with advanced AI analysis.
     </p>
-    <Link to="/home">
-     <button className="mt-5 px-8 py-3 bg-blue-600 text-white font-semibold  shadow-md hover:bg-blue-700 ">
+
+    <Link to="/Login">
+     <button className="mt-5 px-8 py-3 bg-blue-600 text-white font-semibold  shadow-md hover:bg-blue-700">
       Get Started
     </button>
     </Link>
