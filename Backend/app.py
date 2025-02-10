@@ -1,6 +1,7 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request , render_template, redirect, url_for
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import googleapiclient.discovery
+
 
 app = Flask(__name__)
 
