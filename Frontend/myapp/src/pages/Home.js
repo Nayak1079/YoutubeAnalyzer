@@ -110,7 +110,15 @@ export default function Home() {
 
           {/* Graphic representation of the sentiment analysis results. */}
           <div className='bg-white p-5 rounded-sm '>
-          <PieChart positive={result["Total positive comments"]} negative={result["Total negative comments"]} neutral={result["Total neutral comments"]} />
+          {/* <PieChart positive={result["Total positive comments"]} negative={result["Total negative comments"]} neutral={result["Total neutral comments"]} /> */}
+          <PieChart 
+    positive={result["Total positive comments"]} 
+    negative={result["Total negative comments"]} 
+    neutral={result["Total neutral comments"]} 
+    videoTitle={result["videoTitle"]} 
+    totalComments={result["Total comments analyzed"]} 
+/>
+
           </div>
 
         </div>  

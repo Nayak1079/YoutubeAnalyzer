@@ -12,13 +12,14 @@ export default function SignupForm ({Signedup,setSignup})  {
       event.preventDefault();
       if(SignUpInfo.password===SignUpInfo.confirmpassword){
         try {
-          const response = await fetch('http://localhost:3000/Signup', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(SignUpInfo),
-          });
+          const response = await fetch('http://127.0.0.1:5000/Signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: "include",  // Ensure cookies/sessions are sent if needed
+            body: JSON.stringify(SignUpInfo),
+        });
   
           // Parse the response
           const data = await response.json();
