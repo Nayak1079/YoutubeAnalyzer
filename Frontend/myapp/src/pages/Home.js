@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import toast, { Toaster } from "react-hot-toast";
 import PieChart from '../components/Piechar';
@@ -93,6 +94,7 @@ export default function Home() {
             <p><span className='text-green-700 font-bold'>Positive</span> Comments Percentage: {result["Positive comments percentage"]}%</p>
             <p><span className='text-red-800 font-bold'>Negative</span> Comments Percentage: {result["Negative comments percentage"]}%</p>
             <p><span className='text-gray-600 font-bold'>Neutral</span> Comments Percentage: {result["Neutral comments percentage"]}%</p>
+            <p><span className='text-red-600 font-bold'>Spam Percentage</span>: {result["Spam percentage"]}%</p>
             <button className="bg-blue-600 text-white  font-medium w-58 py-2 px-5 mt-3  hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
              onClick={() =>{setShowGraph(true)}}>
               Show Graph
@@ -110,7 +112,6 @@ export default function Home() {
 
           {/* Graphic representation of the sentiment analysis results. */}
           <div className='bg-white p-5 rounded-sm '>
-          {/* <PieChart positive={result["Total positive comments"]} negative={result["Total negative comments"]} neutral={result["Total neutral comments"]} /> */}
           <PieChart 
     positive={result["Total positive comments"]} 
     negative={result["Total negative comments"]} 
